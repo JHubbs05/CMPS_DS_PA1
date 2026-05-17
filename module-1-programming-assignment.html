@@ -45,6 +45,10 @@ console.log("JavaScript basics");
 // 3. Print the content of the variable to the console (use console.log()).
 // 4. Alert the content of the variable to the screen.
 
+var Test = "Hello World!";
+console.log(Test);
+alert(Test)
+
 // 5. Predict what the following code will print (write it down), then try it.
 var myVariable = "global";
 var myOtherVariable = "global";
@@ -59,19 +63,46 @@ function myOtherFunction() {
   return myOtherVariable;
 }
 
-//console.log(myVariable);
-//console.log(myFunction());
-//console.log(myOtherVariable);
-//console.log(myOtherFunction());
-//console.log(myOtherVariable);
+//Prediction: 
+     //It will likely print out 
+     // "global"
+     //"local"
+     //"global
+     // "local"
+     //"global"
+
+console.log(myVariable);
+console.log(myFunction());
+console.log(myOtherVariable);
+console.log(myOtherFunction());
+console.log(myOtherVariable);  //returned "local" because myOtherVariable has been redefined by the function
 
 // 6. Figure out what the & operator does.
 //    E.g., 10 & 5 == 0 and 10 & 6 == 2, why?
 // NOTE: this is a difficult question
 // HINT: use the console in the browser for testing
 
+//it compares the matching digits of the numbers based on binary, 10 is 1010 and 5 is 101 (none match), whereas 6 is 110 (2 match)
+
 // 7. What is the difference between == and ===? Give an example.
 
+// == ckecks if variables are equivalent to each other regardless of variable type, for example:
+
+//if(1 == "1") {
+// console.log("true");
+//}
+
+//would produce "true"
+//the variables are not the exact same, but they both equal the same thing.
+// === checks if variables are exactly the same:
+
+//if(1 === "1") {
+//  console.log("true");
+//} else {
+//  console.log('false');
+//}
+
+//would produce "false" as one is a string and the other an integer.
 
 
 //--------------------//
@@ -82,13 +113,23 @@ console.log("Control structures");
 // 1. Write an if statement to check if a year is a leap year and print it to
 //    the console.
 var year = 2016;
+var leap = year %= 4;
 // ... put if here ...
+if (leap == 0) {
+  console.log("Is a leap year.")
+} else {
+  console.log("Is not a leap year.")
+}
 
 // 2. Write a loop to calculate n! (n factorial) and print it to the console.
 var n = 10;
+var n2 = 10;
 // ... put loop here ...
-
-
+while (n2 != 0) {
+  n2--;
+  console.log(n *= n2);
+}
+// 10! = 3,628,800
 
 //-----------//
 // Functions //
@@ -99,14 +140,16 @@ console.log("Functions");
 //    first or last position of the array.
 function checkForNumber(arr, num) {
   // modify
-  return false;
+  if (arr.indexOf(num) == 0 || arr.indexOf(num) == 3)
+    {
+    return true
+    } else return false;
 }
 // NOTE: all these tests should eventually print true.
 console.log(checkForNumber([4, 2, 5, 3], 4) === true);
 console.log(checkForNumber([4, 2, 5, 3], 3) === true);
 console.log(checkForNumber([4, 2, 5, 3], 2) === false);
 console.log(checkForNumber([4, 2, 5, 3], 13) === false);
-
 
 
 //-------------------------------------------//
@@ -117,16 +160,23 @@ console.log("Object-oriented programming in JavaScript");
 // 1. Add methods to the following object to calculate the circumference
 //   and area.
 
-function Triangle(side) {
+function Triangle(side, height) {
   this.side = side;
+  this.height = height;
+  this.getCircumference = function(side){
+    return side * 3;
+  }
+  this.getArea = function(side, height) {
+  return (side * height) / 2;
+  }
 }
 
-// ... add getCircumference and getArea methods ...
+// ... add get Circumference and getArea methods ...
 // HINT: use the prototype
 
-var triangle = new Triangle(5);
-//console.log("The circumference for the triangle is " + triangle.getCircumference());
-//console.log("The area for the triangle is " + triangle.getArea());
+var triangle = new Triangle(5, 4.33)
+console.log("The circumference for the triangle is " + triangle.getCircumference(5));
+console.log("The area for the triangle is " + triangle.getArea(5, 4.33));
 
 
 
@@ -149,12 +199,31 @@ console.log("Why should we use arrays?");
 //    temperature for each day in a separate variable. Calculate the average
 //    temperature and print it to the console.
 
+var sat = 81;
+var sun = 84;
+var mon = 90;
+var tue = 92;
+var wed = 89;
+
+console.log("The average temperature is: " + (sat + sun + mon + tue + wed) / 5);
+
+
 // 2. Solve the same problem as in (1) but store the temperatures in an array.
+
+
+
+var forecast = [];
+forecast[0] = 81;
+forecast[1] = 84;
+forecast[2] = 90;
+forecast[3] = 92;
+forecast[4] = 89;
+console.log("The average temperature is: " + (forecast[0] + forecast[1] + forecast[2] + forecast[3] + forecast[4]) /5);
 
 // 3. Suppose you want to look at the forecast for the next 10 days instead of
 //    5 days. Is the code for solution (1) or (2) easier to update?
 
-
+//Solution 1 is easier based on the way I did this, but with a function 2 would prove more effective.
 
 //----------------------------------//
 // Creating and initializing arrays //
@@ -171,17 +240,32 @@ var daysOfWeek5 = ["Sunday", "Monday", "Tuesday", "Wednesday",
                    "Thursday", "Friday", "Saturday"];
 
 // 1. Get the length for each array and print it to the console.
-
+console.log(daysOfWeek1.length)
+console.log(daysOfWeek2.length)
+console.log(daysOfWeek3.length)
+console.log(daysOfWeek4.length)
+console.log(daysOfWeek5.length)
 // 2. Is is possible to create an array with just the number 7 in it?
 //    How about 7 and 8?
+// yes: var oneVal = [7]; or var twoVal = [7, 8];
 
 // 3. Which notation do you prefer: new Array() or []?
+
+// I prefer []
 
 // 4. The fibonacci sequence is defined as 0, 1, 1, 2, 3, 5, 8, 13, 21, ...
 //    Create an array with the first 25 elements of this sequence.
 //    For more info see https://en.wikipedia.org/wiki/Fibonacci_number
 
 
+var fibonacci = [0, 1, 2];
+for (var i = 3; i < 26; i++) {
+  fibonacci[i] = fibonacci[i - 1] + fibonacci[i - 2];
+}
+console.log("fibonacci sequence: ");
+for (var i = 1; i < fibonacci.length; i++) {
+  console.log(fibonacci[i]);
+}
 
 //-----------------//
 // Adding elements //
@@ -193,11 +277,16 @@ var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 // 1. Add 10 to the end of the array.
 
+arr.push(10);
+
 // 2. Add 0 to the beginning of the array.
+
+arr.unshift(0);
 
 // 3. What is the new length of the array? Guess before checking it.
 
-
+//the new length would be 11 elements.
+console.log(arr);
 
 //-------------------//
 // Removing elements //
@@ -208,9 +297,12 @@ console.log("Removing elements");
 
 // 1. Remove 10 from the end of the array.
 
+arr.pop(10);
+
 // 2. Remove 0 from the beginning of the array.
 
-
+arr.shift(0);
+console.log(arr);
 
 //-------------------------------------------------------//
 // Adding and removing elements from a specific position //
@@ -221,7 +313,13 @@ console.log("Adding and removing elements from a specific position");
 
 // 1. Remove all elements except the first and last.
 
+arr.splice(1,7);
+console.log(arr);
+
 // 2. Insert the numbers that were just removed back into the array.
+
+arr.splice(1, 0, 2, 3, 4, 5, 6, 7, 8);
+console.log(arr);
 
 // NOTE: arr should be back to its original state at this point.
 
@@ -239,7 +337,14 @@ var arr = [[1, 2, 3],
            [4, 5, 6],
            [7, 8, 9]];
 
+var sum = 0;
 
+for (var i = 0; i < arr.length; i++) {
+  for (var j = 0; j < arr[i].length; j++) {
+    sum += arr[i][j];
+  }
+}
+console.log(sum);
 
 //-----------------------------------------//
 // References for JavaScript array methods //
@@ -254,17 +359,30 @@ var negativeNumbers = [-3, -2, -1];
 
 // 1. Create a new array 'numbers' that contains all numbers above in order.
 
-var numbers = null; // change this
+var numbers = negativeNumbers.concat(zero, positiveNumbers); // change this: ok.
 
 // 2. Check if every number in the numbers array is less than 10 and print
 //    the result to the console.
 
+function isLessThan(num) {
+  return num < 10;
+}
+console.log(numbers.every(isLessThan));
+
 // 3. Select all the nonnegative numbers from the numbers array and store them
 //    in a new array. Print the array to the console.
 
+function isPos(num) {
+  return num > 0;
+}
+console.log(numbers.filter(isPos))
+
 // 4. Create a new array that contains all the numbers but then squared.
 
-
+var squareIt = numbers.map(function(num) {
+ return num * num
+})
+ console.log(squareIt);
 
 </script>
 </head>
