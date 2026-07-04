@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CMPS 260: Module 8 Programming Assignment</title>
+<style>* { font-family: monospace; }</style>
+<script>
+
+// NOTE: You must implement the data structures using the no prototype approach.
+//       This is what the book uses, so you can copy it.
+//       See also: https://it.pointpark.edu/tutorials/no-prototype-vs-prototype/
+
+// NOTE: Please review the following links regularly:
+//       https://it.pointpark.edu/tutorials/arrays-vs-objects/
+//       https://it.pointpark.edu/tutorials/no-prototype-vs-prototype/
+//       https://it.pointpark.edu/tutorials/implementation-vs-interface/
+
+
+
+//----------------//
+// Big O notation //
+//----------------//
+console.log("Big O notation");
+
+// 1. Analyze the complexity of the isPalindrome function below. Make a
+//    distinction between best, worst, and average case complexity.
+
+function isPalindrome(str) {
+  for (var i = 0; i < str.length/2; i++) {
+    if (str[i] !== str[str.length-i-1]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+// The complexity of the previous function is O(n), as it iterates through the length of str and so it takes as long as it does to go through it. 
+// The worst case would be O(n), and average would be O(n) as well, and the best case would be O(1) in the event it is a one long string.
+
+// 2. Write a program that finds the minimum element in a stack in O(1) time
+//    complexity. Note that earlier solutions searched through the elements on
+//    the stack but that leads to an O(n) solution.
+//    NOTE: this question is sometimes asked on interviews.
+
+
+function Stack() {
+  var items = [];
+
+  this.push = function(element) {
+    items.push(element);
+  }
+
+  this.pop = function(element) {
+    return items.pop(element);
+  }
+
+  this.peek = function() {
+    return items[items.length-1];
+  }
+
+  this.empty = function() {
+    return items.length == 0;
+  }
+
+  this.size = function() {
+    return items.length;
+  }
+
+  this.clear = function() {
+    items = [];
+  }
+
+  this.print = function() {
+    console.log(items.toString());
+  }
+
+  this.findMin = function() {
+    return Math.min(...items);
+  }
+}
+
+var stack = new Stack();
+stack.push(9)
+stack.push(4)
+stack.push(5)
+stack.push(8)
+stack.push(2)
+stack.push(8)
+
+console.log(stack.findMin());
+
+//----------------------------//
+// Having fun with algorithms //
+//----------------------------//
+console.log("Having fun with algorithms");
+
+// 1. Solve Project Euler problem 1 (https://projecteuler.net/problem=1).
+
+function eulerP1(num) {
+  var sum = 0;
+  var numArray = [];
+  var j = 1;
+
+  while(j < num) {
+    numArray.push(j);
+    j++;
+  }
+
+  for (var i = 0; i <= numArray.length; i++) {
+    if (numArray[i-1] % 3 === 0 || numArray[i-1] % 5 === 0) {
+      sum += i;
+    }
+  }
+  return sum;
+}
+
+console.log("The sum of all multiples of 3 or 5 below 1000 is: " + eulerP1(1000));
+
+// 2. Solve Project Euler problem 2 (https://projecteuler.net/problem=2).
+
+var fibonacci = [];
+fibonacci[1] = 1;
+fibonacci[2] = 1;
+for(var i = 3; i < 34; i++){ // 34 is the max number of iterations before the value is over 4 mil.
+ fibonacci[i] = fibonacci[i-1] + fibonacci[i-2];
+}
+
+  for(var i = 0; i < fibonacci.length; i++) { //finding the max value under 4 mil and its position.
+    if (fibonacci[i] > 4000000) {
+      console.log(fibonacci[i]);
+      console.log(i);
+    }
+  }
+
+var sum = 0;
+
+for(var i = 0; i < fibonacci.length; i++) {
+  if (fibonacci[i] % 2 === 0) {
+    sum += fibonacci[i];
+  }
+} console.log("The sum of all even numbers in the Fibonacci sequence before 4 million is: " + sum);
+
+</script>
+</head>
+<body>
+  See console!
+</body>
+</html>
