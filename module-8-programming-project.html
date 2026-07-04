@@ -124,34 +124,6 @@ function Dictionary() {
   };
 }
 
-function Queue() {
-  var items = [];
-
-  this.enqueue = function(element) {
-    items.push(element);
-  };
-
-  this.dequeue = function() {
-    return items.shift();
-  };
-
-  this.front = function(element) {
-    return items[0];
-  };
-
-  this.isEmpty = function() {
-    return items.length == 0;
-  }
-
-  this.size = function() {
-    return items.length;
-  }
-
-  this.print = function() {
-    console.log(items.toString());
-  };
-}
-
 function Graph() {
   this.vertices = [];
   this.adjList = new Dictionary()
@@ -180,39 +152,6 @@ Graph.prototype.addVertex = function(v) {
     return s;
   }
 
-Graph.prototype.bfs = function(v, callback) {
-    var color = initializeColor();
-    var queue = new Queue();
-
-    queue.enqueue(v);
-
-    while (!queue.isEmpty()) {
-      var u = queue.dequeue();
-      var neighbors = adjList.get(u);
-      color[u] = 'gray';
-      for (var i = 0; i < neighbors.length; i++) {
-        var w = neighbors[i];
-        if (color[w] === 'white') {
-          color[w] = 'gray';
-          queue.enqueue(w);
-        }
-      }
-      color[u] = 'black';
-      if(callback) {
-        callback(u);
-      }
-    }
-  }
-  
-  var initializeColor = function() {
-  var color = [];
-
-  for (var i = 0; i < vertices.length; i++) {
-    color[vertices[i]] = 'white';
-  }
-  return color;
-}
-
   var graph = new Graph();
 
   var myVertices = ['A', 'B', 'C', 'D'];
@@ -232,7 +171,7 @@ graph.addEdge('D', 'A');
 graph.addEdge('D', 'B');
 graph.addEdge('D', 'C');
 
-// I attempted to bring in the bfs function from a previous assignment and rework it, unfortunatly I ran out of time before I could get it to work.
+// I attempted to bring in the bfs function from a previous assignment and rework it, unfortunatly I ran out of time before I could get it to work. 
 
 // 4. Solve https://csacademy.com/contest/interview-archive/task/intersecting-rectangles/
 //    What is the runtime complexity of your solution?
@@ -241,12 +180,30 @@ graph.addEdge('D', 'C');
 //          that tests whether one rectangle is inside another. Then test your
 //          code on just two rectangles first to make sure it works.
 
-function intersectingRectangles(rect1, rect2) {
-   
+function makeNewRect() {
+  this.rectangle = [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)]
+}
+
+makeNewRect.prototype.count = function(num) {
+    var count1 = num;
+    return count1;
   }
 
+function intersectingRectangles(N) {
+  for (var i = 0; i < N; i++) {
+    var counter = 1;
+    var rect = new makeNewRect();
+    rect.count(counter);
+    counter++;
+  }
+}
 
+intersectingRectangles(2);
 
+// Same as with the traveling salesman problem, for this however, i tried many different way. The one I ended with the idea was to make the rectangles objects that randomly generated and then assigned a number
+//to tell them apart, this is where I failed to get it to work, but the idea was to then compare the rectangles by their "counter" which told them apart and then just compare the arrays within them by for-loops
+//and if-thens. This was much more difficult than I expected, and i'm not sure if its result would have been what the question was asking for. 
+ 
 </script>
 </head>
 <body>
